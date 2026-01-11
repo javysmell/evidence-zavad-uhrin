@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using evidence_zavad_uhrin.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace evidence_zavad_uhrin.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
-        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        //{
-        //}
+        public DbSet<Issues> Issues { get; set; }
+
+        public DbSet<Rooms> Rooms { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySQL("server=mysqlstudenti.litv.sssvt.cz;database=4c1_uhrinpatrik_db1;uid=uhrinpatrik;password=123456");
+        }
     }
 }
