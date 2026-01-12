@@ -20,7 +20,7 @@ namespace evidence_zavad_uhrin.Models
         public DateTime CreatedAt { get; set; }
 
         [Column("Status")]
-        public Enum Status { get; set; }
+        public string Status { get; set; }
 
         [Column("RoomId")]
         public int RoomId { get; set; }
