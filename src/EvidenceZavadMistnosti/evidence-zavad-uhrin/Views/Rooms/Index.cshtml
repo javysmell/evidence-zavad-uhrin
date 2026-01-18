@@ -1,0 +1,53 @@
+﻿@model IEnumerable<evidence_zavad_uhrin.Models.Rooms>
+
+@{
+    ViewData["Title"] = "Místnosti";
+}
+
+<div class="page-container">
+    <div class="page-header">
+        <h1>Místnosti</h1>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-primary" asp-action="Create">+ Přidat místnost</a>
+        }
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Název</th>
+                <th>Patro</th>
+                <th>Popis</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var room in Model)
+                {
+                    <tr>
+                        <td>@room.Name</td>
+                        <td>@room.Floor</td>
+                        <td>@room.RoomDescription</td>
+                        <td class="actions">
+                            <a class="btn btn-small" asp-action="Details" asp-route-id="@room.RoomsId">Detail</a>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="btn btn-small" asp-action="Edit" asp-route-id="@room.RoomsId">Upravit</a>
+                                <a class="btn btn-small btn-danger" asp-action="Delete" asp-route-id="@room.RoomsId">Smazat</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <p>No rooms available.</p>
+            }
+        </tbody>
+    </table>
+</div>

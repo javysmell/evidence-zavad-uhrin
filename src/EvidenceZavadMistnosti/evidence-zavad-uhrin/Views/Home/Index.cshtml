@@ -1,8 +1,28 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Evidence závad";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero">
+    <div class="hero-content">
+        <h1>Evidence závad v budově</h1>
+        <p>
+            Aplikace slouží k evidenci závad v kancelářských místnostech.
+            Každá místnost má odpovědnou osobu, která zapisuje a spravuje závady.
+        </p>
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <div class="hero-buttons">
+                <a class="btn btn-primary" href="/Rooms">Místnosti</a>
+                <a class="btn btn-secondary" href="/Issues">Závady</a>
+            </div>
+        }
+        else
+        {
+            <div class="hero-buttons">
+                <a class="btn btn-primary" href="/Identity/Account/Login">Přihlásit se</a>
+                <a class="btn btn-secondary" href="/Identity/Account/Register">Registrovat se</a>
+            </div>
+        }
+    </div>
 </div>
