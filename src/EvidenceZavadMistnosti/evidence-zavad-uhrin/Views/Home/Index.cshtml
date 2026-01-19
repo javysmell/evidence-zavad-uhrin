@@ -10,7 +10,7 @@
             Každá místnost má odpovědnou osobu, která zapisuje a spravuje závady.
         </p>
 
-        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        @if (User.Identity != null && User.Identity.IsAuthenticated) //usera vytvorim potom
         {
             <div class="hero-buttons">
                 <a class="btn btn-primary" href="/Rooms">Místnosti</a>
