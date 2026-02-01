@@ -9,6 +9,8 @@ namespace evidence_zavad_uhrin.Data
 
         public DbSet<Rooms> Rooms { get; set; }
 
+        public DbSet<Users> Users { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=mysqlstudenti.litv.sssvt.cz;database=4c1_uhrinpatrik_db1;uid=uhrinpatrik;password=123456");

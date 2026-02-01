@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Přihlášení";
+}
+
+<div class="auth-container">
+    <div class="auth-card auth-login-card">
+        <h2 class="auth-title">Přihlášení</h2>
+
+        <form class="auth-form" method="post">
+            <div class="auth-group">
+                <label class="auth-label" for="auth-login-username">Uživatelské jméno</label>
+                <input class="auth-input"
+                       id="auth-login-username"
+                       name="username"
+                       type="text"
+                       required />
+            </div>
+
+            <div class="auth-group">
+                <label class="auth-label" for="auth-login-password">Heslo</label>
+                <input class="auth-input"
+                       id="auth-login-password"
+                       name="password"
+                       type="password"
+                       required />
+            </div>
+
+            <button class="auth-button auth-button-primary" type="submit">
+                Přihlásit se
+            </button>
+        </form>
+
+        <p class="auth-footer">
+            Nemáš účet?
+            <a class="auth-link" href="/Account/Register">Registrace</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Registrace";
+}
+
+<div class="auth-container">
+    <div class="auth-card auth-register-card">
+        <h2 class="auth-title">Registrace</h2>
+
+        <form class="auth-form" method="post">
+            <div class="auth-group">
+                <label class="auth-label" for="auth-register-username">
+                    Uživatelské jméno
+                </label>
+                <input class="auth-input"
+                       id="auth-register-username"
+                       name="username"
+                       type="text"
+                       required />
+            </div>
+
+            <div class="auth-group">
+                <label class="auth-label" for="auth-register-password">
+                    Heslo
+                </label>
+                <input class="auth-input"
+                       id="auth-register-password"
+                       name="password"
+                       type="password"
+                       required />
+            </div>
+
+            <div class="auth-group">
+                <label class="auth-label" for="auth-register-confirm-password">
+                    Potvrzení hesla
+                </label>
+                <input class="auth-input"
+                       id="auth-register-confirm-password"
+                       name="confirmPassword"
+                       type="password"
+                       required />
+            </div>
+
+            <button class="auth-button auth-button-primary" type="submit">
+                Registrovat
+            </button>
+        </form>
+
+        <p class="auth-footer">
+            Už máš účet?
+            <a class="auth-link" href="/Account/Login">Přihlášení</a>
+        </p>
+    </div>
+</div>

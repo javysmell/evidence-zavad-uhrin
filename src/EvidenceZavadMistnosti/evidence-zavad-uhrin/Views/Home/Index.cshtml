@@ -9,20 +9,9 @@
             Aplikace slouží k evidenci závad v kancelářských místnostech.
             Každá místnost má odpovědnou osobu, která zapisuje a spravuje závady.
         </p>
-
-        @if (User.Identity != null && User.Identity.IsAuthenticated) //usera vytvorim potom
-        {
             <div class="hero-buttons">
-                <a class="btn btn-primary" href="/Rooms">Místnosti</a>
-                <a class="btn btn-secondary" href="/Issues">Závady</a>
+                <a class="btn btn-primary" href="/Account/Login">Přihlásit se</a>
+                <a class="btn btn-secondary" href="/Account/Register">Registrovat se</a>
             </div>
-        }
-        else
-        {
-            <div class="hero-buttons">
-                <a class="btn btn-primary" href="/Identity/Account/Login">Přihlásit se</a>
-                <a class="btn btn-secondary" href="/Identity/Account/Register">Registrovat se</a>
-            </div>
-        }
     </div>
 </div>
