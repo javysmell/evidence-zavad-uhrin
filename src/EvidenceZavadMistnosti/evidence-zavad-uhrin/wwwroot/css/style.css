@@ -139,9 +139,7 @@ body {
     background-color: #a93226;
 }
 
-/* =========================
-   AUTH (LOGIN / REGISTER)
-   ========================= */
+/* login + register */
 
 .auth-container {
     min-height: 80vh;

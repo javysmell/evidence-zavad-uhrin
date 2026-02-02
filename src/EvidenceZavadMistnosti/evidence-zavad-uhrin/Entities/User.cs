@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace evidence_zavad_uhrin.Models
+namespace evidence_zavad_uhrin.Entities
 {
-    [Table("Users")]
-    public class Users
+    public class User
     {
         [Key]
         [Column("Id")]
@@ -15,5 +14,12 @@ namespace evidence_zavad_uhrin.Models
 
         [Column("Password")]
         public string Password { get; set; }
+
+        public User (int userId, string username, string password)
+        {
+            UserId = userId;
+            Username = username;
+            Password = password;
+        }
     }
 }

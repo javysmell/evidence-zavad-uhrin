@@ -24,30 +24,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model != null)
-            {
-                foreach (var room in Model)
-                {
-                    <tr>
-                        <td>@room.Name</td>
-                        <td>@room.Floor</td>
-                        <td>@room.RoomDescription</td>
-                        <td class="actions">
-                            <a class="btn btn-small" asp-action="Details" asp-route-id="@room.RoomsId">Detail</a>
 
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <a class="btn btn-small" asp-action="Edit" asp-route-id="@room.RoomsId">Upravit</a>
-                                <a class="btn btn-small btn-danger" asp-action="Delete" asp-route-id="@room.RoomsId">Smazat</a>
-                            }
-                        </td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <p>No rooms available.</p>
-            }
+
+
         </tbody>
     </table>
 </div>

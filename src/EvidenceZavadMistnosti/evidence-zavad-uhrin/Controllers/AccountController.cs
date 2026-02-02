@@ -7,6 +7,7 @@ namespace evidence_zavad_uhrin.Controllers
         public IActionResult Login()
         {
             return View();
+
         }
 
         public IActionResult Register()
