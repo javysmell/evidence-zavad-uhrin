@@ -1,4 +1,5 @@
 ﻿using evidence_zavad_uhrin.Models;
+using evidence_zavad_uhrin.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace evidence_zavad_uhrin.Data
@@ -9,7 +10,7 @@ namespace evidence_zavad_uhrin.Data
 
         public DbSet<Rooms> Rooms { get; set; }
 
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
