@@ -1,8 +1,6 @@
 ﻿using evidence_zavad_uhrin.Data;
 using evidence_zavad_uhrin.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
-using System.Security.Cryptography;
 
 namespace evidence_zavad_uhrin.Controllers
 {
@@ -17,6 +15,12 @@ namespace evidence_zavad_uhrin.Controllers
 
         [HttpGet]
         public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }

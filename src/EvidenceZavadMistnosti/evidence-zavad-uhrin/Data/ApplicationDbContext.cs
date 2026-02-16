@@ -8,7 +8,7 @@ namespace evidence_zavad_uhrin.Data
     {
         public DbSet<Issues> Issues { get; set; }
 
-        public DbSet<Rooms> Rooms { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
         public DbSet<User> Users { get; set; }
 

@@ -1,32 +1,74 @@
-﻿@model IEnumerable<evidence_zavad_uhrin.Models.Rooms>
+﻿@model List<evidence_zavad_uhrin.Models.Room>
 
 @{
     ViewData["Title"] = "Místnosti";
 }
 
-<div class="page-container">
-    <div class="page-header">
-        <h1>Místnosti</h1>
+<div class="rooms-wrapper">
 
-        @if (User.IsInRole("Admin"))
-        {
-            <a class="btn btn-primary" asp-action="Create">+ Přidat místnost</a>
-        }
+    <div class="rooms-header">
+        <h1 class="rooms-heading">Správa místností</h1>
     </div>
 
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>Název</th>
-                <th>Patro</th>
-                <th>Popis</th>
-                <th>Akce</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="rooms-card">
 
+        <!-- CREATE -->
+        <form method="post" asp-action="Create" class="rooms-create-form">
+            <input type="text"
+                   name="name"
+                   class="rooms-input"
+                   placeholder="Zadej název nové místnosti"
+                   required />
 
+            <button type="submit" class="rooms-btn rooms-btn-primary">
+                Přidat místnost
+            </button>
+        </form>
 
-        </tbody>
-    </table>
+        <div class="rooms-table-wrapper">
+            <table class="rooms-table">
+                <thead>
+                    <tr>
+                        <th>Název místnosti</th>
+                        <th class="rooms-actions-column">Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var room in Model)
+                    {
+                        <tr>
+                            <td>
+                                <form method="post" asp-action="Edit" class="rooms-edit-form">
+                                    <input type="hidden" name="id" value="@room.RoomId" />
+
+                                    <input type="text"
+                                           name="name"
+                                           value="@room.Name"
+                                           class="rooms-input-inline" />
+
+                                    <button type="submit"
+                                            class="rooms-btn rooms-btn-save">
+                                        Uložit
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td>
+                                <form method="post" asp-action="Delete">
+                                    <input type="hidden" name="id" value="@room.RoomId" />
+
+                                    <button type="submit"
+                                            class="rooms-btn rooms-btn-danger">
+                                        Smazat
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>
+

@@ -1,14 +1,67 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using evidence_zavad_uhrin.Data;
+using evidence_zavad_uhrin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace evidence_zavad_uhrin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class RoomsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public RoomsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // READ
         public IActionResult Index()
         {
-            return View();
+            var rooms = _context.Rooms.ToList();
+            return View(rooms);
+        }
+
+        // CREATE
+        [HttpPost]
+        public IActionResult Create(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                var room = new Room { Name = name };
+                _context.Rooms.Add(room);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        // UPDATE
+        [HttpPost]
+        public IActionResult Edit(int id, string name)
+        {
+            var room = _context.Rooms.Find(id);
+            if (room != null)
+            {
+                room.Name = name;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        // DELETE
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var room = _context.Rooms.Find(id);
+            if (room != null)
+            {
+                _context.Rooms.Remove(room);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
