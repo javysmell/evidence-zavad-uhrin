@@ -2,21 +2,25 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using evidence_zavad_uhrin.Data;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // 1. θαst - builder sracky
+
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
-        options.LoginPath = "/Account/Login"; //home bude jina stranka pak
+    //    options.LoginPath = "/Account/Login"; //home bude jina stranka pak
     //    options.LogoutPath = "Account/Logout"; // tahle stranka se pak udela
     //    options.AccessDeniedPath = "/Account/Denied"; //taky
 
         options.Cookie.HttpOnly = true;
     });
+
 
 var app = builder.Build();
 

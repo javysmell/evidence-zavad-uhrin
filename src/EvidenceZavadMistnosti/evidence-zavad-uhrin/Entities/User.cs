@@ -9,17 +9,13 @@ namespace evidence_zavad_uhrin.Entities
         [Column("Id")]
         public int UserId { get; set; }
 
+        [Required]
         [Column("Username")]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
+        [Required]
         [Column("Password")]
-        public string Password { get; set; }
-
-        public User (int userId, string username, string password)
-        {
-            UserId = userId;
-            Username = username;
-            Password = password;
-        }
+        public string Password { get; set; } = string.Empty;
     }
 }
+
