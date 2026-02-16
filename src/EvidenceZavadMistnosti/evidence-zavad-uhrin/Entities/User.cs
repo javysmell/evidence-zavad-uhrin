@@ -12,7 +12,6 @@ namespace evidence_zavad_uhrin.Entities
         [Required]
         [Column("Username")]
         public string Username { get; set; } = string.Empty;
-
         [Required]
         [Column("Password")]
         public string Password { get; set; } = string.Empty;

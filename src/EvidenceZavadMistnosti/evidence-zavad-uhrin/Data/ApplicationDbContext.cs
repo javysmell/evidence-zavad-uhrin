@@ -6,6 +6,14 @@ namespace evidence_zavad_uhrin.Data
 {
     public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        protected ApplicationDbContext()
+        {
+        }
+
         public DbSet<Issues> Issues { get; set; }
 
         public DbSet<Room> Rooms { get; set; }

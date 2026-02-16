@@ -24,11 +24,16 @@ namespace evidence_zavad_uhrin.Controllers
 
         // CREATE
         [HttpPost]
-        public IActionResult Create(string name)
+        public IActionResult Create(string name, int floor, string roomDescription)
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
-                var room = new Room { Name = name };
+                var room = new Room {
+                    Name = name,
+                    Floor = floor,
+                    RoomDescription = roomDescription,
+                };
+
                 _context.Rooms.Add(room);
                 _context.SaveChanges();
             }
@@ -38,12 +43,15 @@ namespace evidence_zavad_uhrin.Controllers
 
         // UPDATE
         [HttpPost]
-        public IActionResult Edit(int id, string name)
+        public IActionResult Edit(int id, string name, int floor, string roomDescription)
         {
             var room = _context.Rooms.Find(id);
             if (room != null)
             {
                 room.Name = name;
+                room.Floor = floor;
+                room.RoomDescription = roomDescription;
+
                 _context.SaveChanges();
             }
 
