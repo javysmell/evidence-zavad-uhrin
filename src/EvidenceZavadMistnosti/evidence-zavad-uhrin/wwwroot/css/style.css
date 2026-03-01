@@ -1,15 +1,245 @@
-﻿/* homepage */
-body {
-    margin-top: 80px;
+﻿html {
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #111827; /* gray-900 */
+    background: rgba(255,255,255,.12);
+    line-height: 1.5;
+}
+
+/* Linky */
+a {
+    color: #1e3c72;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Obrázky a média */
+img,
+svg,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Utility */
+.container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.mt-2 {
+    margin-top: .5rem;
+}
+
+.mt-3 {
+    margin-top: .75rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
+}
+
+.mb-2 {
+    margin-bottom: .5rem;
+}
+
+.mb-3 {
+    margin-bottom: .75rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Tlačítka – základ (můžeš kombinovat s variants níž) */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+    .btn:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+.btn-primary {
+    background: #2563eb; /* blue-600 */
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background: #1e40af; /* blue-800 */
+    }
+
+.btn-secondary {
+    background: #ffffff;
+    color: #1e3c72;
+    border: 2px solid #1e3c72;
+}
+
+    .btn-secondary:hover {
+        background: rgba(30,60,114,.08);
+    }
+
+.btn-danger {
+    background: #ef4444; /* red-500 */
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background: #dc2626; /* red-600 */
+    }
+
+.btn-success {
+    background: #10b981; /* emerald-500 */
+    color: #fff;
+}
+
+    .btn-success:hover {
+        background: #059669; /* emerald-600 */
+    }
+
+
+/* ------------------------------
+   1) Top bar / Layout header
+   (přesun z inline stylů v _Layout.cshtml)
+   ------------------------------ */
+.topbar {
+    position: fixed;
+    inset: 0 0 auto 0; /* top:0,left:0,right:0 */
+    height: 60px;
+    background: #1e3c72; /* gradient start z hero pro konzistenci */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 2px 14px rgba(0,0,0,.2);
+}
+
+    .topbar .inner {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+/* Brand + levé odkazy */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+    .brand .app-title {
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: .2px;
+    }
+
+    .brand .home-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+    }
+
+/* Navigace */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.nav-link {
+    color: #fff;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+    .nav-link:hover {
+        background: rgba(255,255,255,.12);
+        text-decoration: none;
+    }
+
+/* Pravá strana – uživatel + logout */
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-name {
+    opacity: .95;
+    font-weight: 600;
+}
+
+.logout-form .logout-btn {
+    background: #fff;
+    color: #1e3c72;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+    .logout-form .logout-btn:hover {
+        background: #e6e6e6;
+    }
+
+/* Mezera pod fixed headerem */
+.main {
+    padding-top: 80px; /* 60 header + rezerva */
+}
+
+/* ------------------------------
+   2) Homepage / Hero
+   (navazuje na původní styl)
+   ------------------------------ */
 .hero {
     min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
+    color: #fff;
     padding: 40px;
 }
 
@@ -19,6 +249,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     padding: 40px;
     border-radius: 12px;
+    backdrop-filter: blur(2px);
 }
 
     .hero-content h1 {
@@ -38,49 +269,25 @@ body {
     gap: 20px;
 }
 
-.btn {
-    padding: 12px 28px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background-color: #ffffff;
-    color: #1e3c72;
-}
-
-    .btn-primary:hover {
-        background-color: #e6e6e6;
-    }
-
-.btn-secondary {
-    background-color: transparent;
-    border: 2px solid #ffffff;
-    color: white;
-}
-
-    .btn-secondary:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-/* login + register */
-
+/* ------------------------------
+   3) Auth (Login & Register)
+   (navazuje na původní styl)
+   ------------------------------ */
 .auth-container {
     min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 24px;
 }
 
 .auth-card {
     width: 100%;
-    max-width: 420px;
+    max-width: 440px;
     background: #ffffff;
     padding: 30px 35px;
     border-radius: 12px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
 }
 
 .auth-title {
@@ -117,6 +324,7 @@ body {
     .auth-input:focus {
         outline: none;
         border-color: #1e3c72;
+        box-shadow: 0 0 0 3px rgba(30, 60, 114, .15);
     }
 
 .auth-button {
@@ -141,27 +349,78 @@ body {
 .auth-footer {
     text-align: center;
     margin-top: 20px;
-    font-size: 0.95rem;
+    font-size: .95rem;
 }
 
 .auth-link {
     color: #1e3c72;
-    font-weight: bold;
-    text-decoration: none;
+    font-weight: 700;
 }
 
     .auth-link:hover {
         text-decoration: underline;
     }
 
+/* ------------------------------
+   4) Cards, tabulky, formuláře – shared
+   ------------------------------ */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.12);
+    padding: 24px;
+}
 
-/* ROOMS PAGE */
+.table-wrap {
+    overflow-x: auto;
+}
 
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+    .table th {
+        text-align: left;
+        padding: 14px 10px;
+        background: #f3f4f6; /* gray-100 */
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .table td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+/* Inline edit inputs */
+.input,
+.input-inline {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.input-inline {
+    padding: 8px 10px;
+}
+
+    .input:focus,
+    .input-inline:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(37,99,235,.2);
+    }
+
+/* ------------------------------
+   5) Rooms (převzato a sjednoceno)
+   ------------------------------ */
 .rooms-wrapper {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1f2937, #111827);
+    background: linear-gradient(135deg, #1f2937, #111827); /* gray-800 → gray-900 */
     padding: 50px 20px;
-    font-family: 'Segoe UI', sans-serif;
 }
 
 .rooms-header {
@@ -172,43 +431,42 @@ body {
 .rooms-heading {
     color: #ffffff;
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .rooms-card {
     background: #ffffff;
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 40px;
     border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
 }
 
-/* CREATE FORM */
-
+/* Create form */
 .rooms-create-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 30px;
 }
 
 .rooms-input {
-    flex: 1;
+    flex: 1 1 220px;
     padding: 12px 15px;
     border-radius: 8px;
     border: 1px solid #ddd;
     font-size: 15px;
-    transition: 0.2s;
+    transition: .2s;
 }
 
     .rooms-input:focus {
         border-color: #2563eb;
         outline: none;
-        box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+        box-shadow: 0 0 0 2px rgba(37,99,235,.2);
     }
 
-/* TABLE */
-
+/* Table */
 .rooms-table-wrapper {
     overflow-x: auto;
 }
@@ -230,10 +488,10 @@ body {
         border-bottom: 1px solid #eee;
     }
 
-/* INLINE EDIT */
-
+/* Inline edit */
 .rooms-edit-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -244,15 +502,14 @@ body {
     font-size: 14px;
 }
 
-/* BUTTONS */
-
+/* Buttons */
 .rooms-btn {
     padding: 8px 14px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-    transition: 0.2s;
+    transition: .2s;
 }
 
 .rooms-btn-primary {
@@ -282,3 +539,186 @@ body {
         background: #dc2626;
     }
 
+/* ------------------------------
+   6) Issues (nové – stejné patterny jako Rooms)
+   ------------------------------ */
+.issues-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1f2937, #111827);
+    padding: 50px 20px;
+}
+
+.issues-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.issues-heading {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.issues-card {
+    background: #ffffff;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+}
+
+/* Create form */
+.issues-create-form {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.issues-input,
+.issues-select {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+    .issues-input:focus,
+    .issues-select:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(37,99,235,.2);
+    }
+
+.issues-submit {
+    grid-column: span 6;
+    justify-self: start;
+}
+
+/* Table & inline edit */
+.issues-table-wrapper {
+    overflow-x: auto;
+}
+
+.issues-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .issues-table th {
+        text-align: left;
+        padding: 12px 10px;
+        background: #f3f4f6;
+    }
+
+    .issues-table td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+.issues-edit-form {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(120px, 1fr));
+    gap: 10px;
+    align-items: start;
+}
+
+.issues-input-inline,
+.issues-select-inline {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.issues-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ------------------------------
+   7) Stavové prvky, hlášky
+   ------------------------------ */
+.alert {
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-weight: 600;
+}
+
+.alert-error {
+    background: #fee2e2; /* red-100 */
+    color: #991b1b; /* red-800 */
+    border: 1px solid #fecaca;
+}
+
+.alert-success {
+    background: #dcfce7; /* green-100 */
+    color: #14532d; /* green-900 */
+    border: 1px solid #bbf7d0;
+}
+
+/* ------------------------------
+   8) Responsivita
+   ------------------------------ */
+@media (max-width: 1024px) {
+    .issues-create-form,
+    .issues-edit-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .issues-submit {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .topbar .inner {
+        padding: 0 12px;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .user-box {
+        gap: 8px;
+    }
+
+    .rooms-create-form {
+        gap: 10px;
+    }
+
+    .rooms-input {
+        flex: 1 1 100%;
+    }
+
+    .rooms-card,
+    .issues-card {
+        padding: 24px;
+    }
+
+    .hero-content {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        display: none;
+    }
+    /* jednoduchý „collapse“ */
+    .user-name {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+}
