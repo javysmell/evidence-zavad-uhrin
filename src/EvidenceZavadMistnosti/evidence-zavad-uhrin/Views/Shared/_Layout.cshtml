@@ -1,25 +1,56 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@{
+    var isAuth = User?.Identity?.IsAuthenticated ?? false;
+    var username = isAuth ? User.Identity!.Name : null;
+}
+<!DOCTYPE html>
+<html lang="cs">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>@ViewData["Title"] - evidence_zavad_uhrin</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/evidence_zavad_uhrin.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <!-- Top bar -->
+    <header style="position:fixed;top:0;left:0;right:0;height:60px;background:#1e3c72;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:100;">
+        <div style="display:flex;align-items:center;gap:18px;">
+            <a asp-controller="Home" asp-action="Index" style="color:#fff;text-decoration:none;font-weight:700;">Evidence závad</a>
+            @* Viditelná jen pro přihlášené *@
+            @if (isAuth)
+            {
+                <nav style="display:flex;gap:14px;">
+                    <a asp-controller="Rooms" asp-action="Index" style="color:#fff;text-decoration:none;">Místnosti</a>
+                    <a asp-controller="Issues" asp-action="Index" style="color:#fff;text-decoration:none;">Závady</a>
+                </nav>
+            }
+        </div>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            @if (isAuth)
+            {
+                <span style="opacity:.9;">@username</span>
+                <form asp-controller="Account" asp-action="Logout" method="post" style="margin:0;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" style="background:#fff;color:#1e3c72;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;font-weight:600;">Odhlásit</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" style="color:#fff;text-decoration:none;margin-right:10px;">Přihlásit se</a>
+                <a asp-controller="Account" asp-action="Register" style="color:#fff;text-decoration:none;border:2px solid #fff;padding:6px 12px;border-radius:6px;">Registrovat</a>
+            }
+        </div>
+    </header>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Page content -->
+    <main style="padding-top:80px;">
+        @RenderBody()
+    </main>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

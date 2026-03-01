@@ -2,10 +2,11 @@
 using evidence_zavad_uhrin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace evidence_zavad_uhrin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class RoomsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -51,8 +52,16 @@ namespace evidence_zavad_uhrin.Controllers
                 room.Name = name;
                 room.Floor = floor;
                 room.RoomDescription = roomDescription;
+            }
 
+            try
+            {
                 _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["Error"] = ex.InnerException?.Message ?? ex.Message;
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");

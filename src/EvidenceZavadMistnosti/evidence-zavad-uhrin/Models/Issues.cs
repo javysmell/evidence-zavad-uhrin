@@ -11,16 +11,16 @@ namespace evidence_zavad_uhrin.Models
         public int IssuesId { get; set; }
 
         [Column("Title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Column("Description")]
-        public string IssueDescription { get; set; }
+        public string IssueDescription { get; set; } = string.Empty;
 
         [Column("CreatedAt")]
         public DateTime CreatedAt { get; set; }
 
         [Column("Status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
 
         [Column("RoomId")]
         public int RoomId { get; set; }

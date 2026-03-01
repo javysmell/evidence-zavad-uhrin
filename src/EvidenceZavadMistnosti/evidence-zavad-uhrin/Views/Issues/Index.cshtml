@@ -1,0 +1,89 @@
+﻿@model List<evidence_zavad_uhrin.Models.Issues>
+@{
+    ViewData["Title"] = "Závady";
+    var rooms = ViewBag.Rooms as List<evidence_zavad_uhrin.Models.Room>;
+}
+
+@if (TempData["Error"] != null)
+{
+    <div style="color:#c00; font-weight:600; margin-bottom:12px;">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="rooms-wrapper">
+  <div class="rooms-header">
+    <h2 class="rooms-heading">Evidence závad</h2>
+  </div>
+
+  <div class="rooms-card">
+    <!-- CREATE -->
+    <form class="rooms-form" method="post" action="/Issues/Create">
+      @Html.AntiForgeryToken()
+      <input class="rooms-input" type="text" name="title" placeholder="Název závady" required />
+      <input class="rooms-input" type="text" name="issueDescription" placeholder="Popis" required />
+      <input class="rooms-input" type="datetime-local" name="createdAt" required />
+      <input class="rooms-input" type="text" name="status" placeholder="Stav (např. Nová / V řešení / Uzavřená)" required />
+      <select class="rooms-input" name="roomId" required>
+        <option value="">-- Místnost --</option>
+        @if (rooms != null)
+        {
+            foreach (var r in rooms)
+            {
+                <option value="@r.RoomId">@r.Name (@r.Floor. patro)</option>
+            }
+        }
+      </select>
+      <button class="rooms-btn rooms-btn-primary" type="submit">Přidat</button>
+    </form>
+
+    <!-- LIST -->
+    <div class="rooms-table-wrapper">
+      <table class="rooms-table">
+        <thead>
+          <tr>
+            <th>Název</th>
+            <th>Popis</th>
+            <th>Vytvořeno</th>
+            <th>Stav</th>
+            <th>Místnost</th>
+            <th>Akce</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+              <td colspan="6">
+                <form method="post" action="/Issues/Edit">
+                  @Html.AntiForgeryToken()
+                  <input type="hidden" name="id" value="@item.IssuesId" />
+                  <input class="rooms-input-inline" type="text" name="title" value="@item.Title" required />
+                  <input class="rooms-input-inline" type="text" name="issueDescription" value="@item.IssueDescription" required />
+                  <input class="rooms-input-inline" type="datetime-local" name="createdAt" value="@item.CreatedAt.ToString("yyyy-MM-ddTHH:mm")" required />
+                  <input class="rooms-input-inline" type="text" name="status" value="@item.Status" required />
+                  <select class="rooms-input-inline" name="roomId" required>
+                    @if (rooms != null)
+                    {
+                        foreach (var r in rooms)
+                        {
+                            <option value="@r.RoomId" selected="@(r.RoomId == item.RoomId ? "selected" : null)"> @r.Name (@r.Floor) </option>
+                        }
+                    }
+                  </select>
+                  <button class="rooms-btn rooms-btn-save" type="submit">Uložit</button>
+                </form>
+
+                <form method="post" action="/Issues/Delete">
+                  @Html.AntiForgeryToken()
+                  <input type="hidden" name="id" value="@item.IssuesId" />
+                  <button class="rooms-btn rooms-btn-danger" type="submit" onclick="return confirm('Opravdu smazat?');">Smazat</button>
+                </form>
+              </td>
+            </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

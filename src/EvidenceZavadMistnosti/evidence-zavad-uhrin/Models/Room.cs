@@ -11,7 +11,7 @@ namespace evidence_zavad_uhrin.Models
         public int RoomId { get; set; }
 
         [Column("Name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Column("Floor")]
         public int Floor { get; set; }
