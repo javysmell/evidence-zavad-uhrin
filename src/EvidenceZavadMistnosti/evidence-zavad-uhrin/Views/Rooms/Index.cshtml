@@ -3,56 +3,103 @@
     ViewData["Title"] = "Místnosti";
 }
 
-<div class="rooms-wrapper">
-  <div class="rooms-header">
-    <h2 class="rooms-heading">Správa místností</h2>
-  </div>
-
-  <div class="rooms-card">
-    <!-- CREATE -->
-    <form class="rooms-form" method="post" action="/Rooms/Create">
-      @Html.AntiForgeryToken()
-      <input class="rooms-input" type="text" name="name" placeholder="Název místnosti" required />
-      <input class="rooms-input" type="number" name="floor" placeholder="Patro" required />
-      <input class="rooms-input" type="text" name="roomDescription" placeholder="Popis" required />
-      <button class="rooms-btn rooms-btn-primary" type="submit">Přidat</button>
-    </form>
-
-    <!-- LIST -->
-    <div class="rooms-table-wrapper">
-      <table class="rooms-table">
-        <thead>
-          <tr>
-            <th>Název</th>
-            <th>Patro</th>
-            <th>Popis</th>
-            <th>Akce</th>
-          </tr>
-        </thead>
-        <tbody>
-        @foreach (var room in Model)
-        {
-            <tr>
-              <td colspan="4">
-                <form method="post" action="/Rooms/Edit">
-                  @Html.AntiForgeryToken()
-                  <input type="hidden" name="id" value="@room.RoomId" />
-                  <input class="rooms-input-inline" type="text" name="name" value="@room.Name" required />
-                  <input class="rooms-input-inline" type="number" name="floor" value="@room.Floor" required />
-                  <input class="rooms-input-inline" type="text" name="roomDescription" value="@room.RoomDescription" />
-                  <button class="rooms-btn rooms-btn-save" type="submit">Uložit</button>
-                </form>
-
-                <form method="post" action="/Rooms/Delete">
-                  @Html.AntiForgeryToken()
-                  <input type="hidden" name="id" value="@room.RoomId" />
-                  <button class="rooms-btn rooms-btn-danger" type="submit" onclick="return confirm('Opravdu smazat?');">Smazat</button>
-                </form>
-              </td>
-            </tr>
-        }
-        </tbody>
-      </table>
+<section class="admin-page">
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Správa prostor</span>
+            <h1>Správa místností</h1>
+            <p>Zakládej, upravuj a maž jednotlivé místnosti v budově.</p>
+        </div>
     </div>
-  </div>
-</div>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="admin-grid">
+        <section class="card-surface form-card">
+            <h2>Nová místnost</h2>
+            <form class="data-form" method="post" action="/Rooms/Create">
+                @Html.AntiForgeryToken()
+
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="room-name">Název místnosti</label>
+                        <input id="room-name" class="rooms-input" type="text" name="name" placeholder="Např. Kancelář 204" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="room-floor">Patro</label>
+                        <input id="room-floor" class="rooms-input" type="number" name="floor" placeholder="Např. 2" required />
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label for="room-description">Popis</label>
+                        <input id="room-description" class="rooms-input" type="text" name="roomDescription" placeholder="Krátký popis místnosti" required />
+                    </div>
+                </div>
+
+                <button class="rooms-btn rooms-btn-primary" type="submit">Přidat místnost</button>
+            </form>
+        </section>
+
+        <section class="card-surface list-card">
+            <div class="section-heading">
+                <h2>Seznam místností</h2>
+                <span class="badge-count">@Model.Count</span>
+            </div>
+
+            <div class="entity-list">
+                @if (Model.Any())
+                {
+                    @foreach (var room in Model)
+                    {
+                        <article class="entity-item">
+                            <form class="entity-edit-form" method="post" action="/Rooms/Edit">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@room.RoomId" />
+
+                                <div class="entity-item__grid rooms-entity-grid">
+                                    <div class="form-field">
+                                        <label>Název</label>
+                                        <input class="rooms-input-inline" type="text" name="name" value="@room.Name" required />
+                                    </div>
+
+                                    <div class="form-field">
+                                        <label>Patro</label>
+                                        <input class="rooms-input-inline" type="number" name="floor" value="@room.Floor" required />
+                                    </div>
+
+                                    <div class="form-field form-field-full">
+                                        <label>Popis</label>
+                                        <input class="rooms-input-inline" type="text" name="roomDescription" value="@room.RoomDescription" />
+                                    </div>
+                                </div>
+
+                                <div class="entity-actions">
+                                    <button class="rooms-btn rooms-btn-save" type="submit">Uložit změny</button>
+                                </div>
+                            </form>
+
+                            <form class="entity-delete-form" method="post" action="/Rooms/Delete">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@room.RoomId" />
+                                <button class="rooms-btn rooms-btn-danger" type="submit" onclick="return confirm('Opravdu smazat?');">Smazat</button>
+                            </form>
+                        </article>
+                    }
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <h3>Zatím nejsou založené žádné místnosti</h3>
+                        <p>Vytvoř první místnost pomocí formuláře vlevo.</p>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+</section>

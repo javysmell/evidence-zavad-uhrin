@@ -2,52 +2,71 @@
     ViewData["Title"] = "Registrace";
 }
 
-<div class="auth-container">
-    <div class="auth-card auth-register-card">
-        <h2 class="auth-title">Registrace</h2>
+<section class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card card-surface auth-register-card">
+            <span class="eyebrow">Nový účet</span>
+            <h1 class="auth-title">Registrace</h1>
+            <p class="auth-subtitle">Vytvoř si účet pro správu místností a nahlášených závad.</p>
 
-        <form class="auth-form" method="post">
-            <div class="auth-group">
-                <label class="auth-label" for="auth-register-username">
-                    Uživatelské jméno
-                </label>
-                <input class="auth-input"
-                       id="auth-register-username"
-                       name="username"
-                       type="text"
-                       required />
-            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <div>@error.ErrorMessage</div>
+                    }
+                </div>
+            }
 
-            <div class="auth-group">
-                <label class="auth-label" for="auth-register-password">
-                    Heslo
-                </label>
-                <input class="auth-input"
-                       id="auth-register-password"
-                       name="password"
-                       type="password"
-                       required />
-            </div>
+            <form class="auth-form" method="post">
+                @Html.AntiForgeryToken()
 
-            <div class="auth-group">
-                <label class="auth-label" for="auth-register-confirm-password">
-                    Potvrzení hesla
-                </label>
-                <input class="auth-input"
-                       id="auth-register-confirm-password"
-                       name="confirmPassword"
-                       type="password"
-                       required />
-            </div>
+                <div class="auth-group">
+                    <label class="auth-label" for="auth-register-username">
+                        Uživatelské jméno
+                    </label>
+                    <input class="auth-input"
+                           id="auth-register-username"
+                           name="username"
+                           type="text"
+                           autocomplete="username"
+                           required />
+                </div>
 
-            <button class="auth-button auth-button-primary" type="submit">
-                Registrovat
-            </button>
-        </form>
+                <div class="auth-group">
+                    <label class="auth-label" for="auth-register-password">
+                        Heslo
+                    </label>
+                    <input class="auth-input"
+                           id="auth-register-password"
+                           name="password"
+                           type="password"
+                           autocomplete="new-password"
+                           required />
+                </div>
 
-        <p class="auth-footer">
-            Už máš účet?
-            <a class="auth-link" href="/Account/Login">Přihlášení</a>
-        </p>
+                <div class="auth-group">
+                    <label class="auth-label" for="auth-register-confirm-password">
+                        Potvrzení hesla
+                    </label>
+                    <input class="auth-input"
+                           id="auth-register-confirm-password"
+                           name="confirmPassword"
+                           type="password"
+                           autocomplete="new-password"
+                           required />
+                </div>
+
+                <button class="auth-button auth-button-primary" type="submit">
+                    Registrovat
+                </button>
+            </form>
+
+            <p class="auth-footer">
+                Už máš účet?
+                <a class="auth-link" asp-controller="Account" asp-action="Login">Přihlášení</a>
+            </p>
+        </div>
     </div>
-</div>
+</section>

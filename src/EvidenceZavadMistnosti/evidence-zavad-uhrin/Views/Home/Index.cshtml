@@ -2,16 +2,39 @@
     ViewData["Title"] = "Evidence závad";
 }
 
-<div class="hero">
-    <div class="hero-content">
-        <h1>Evidence závad v budově</h1>
-        <p>
-            Aplikace slouží k evidenci závad v kancelářských místnostech.
-            Každá místnost má odpovědnou osobu, která zapisuje a spravuje závady.
-        </p>
+<section class="hero-section">
+    <div class="hero-grid">
+        <div class="hero-content card-surface">
+            <span class="eyebrow">Přehledná evidence pro budovy a kanceláře</span>
+            <h1>Evidence závad v budově bez chaosu a papírů</h1>
+            <p class="hero-text">
+                Aplikace slouží k evidenci závad v kancelářských místnostech.
+                Každá místnost má odpovědnou osobu, která může jednoduše zapisovat,
+                upravovat a spravovat nahlášené problémy na jednom místě.
+            </p>
+
             <div class="hero-buttons">
-                <a class="btn btn-primary" href="/Account/Login">Přihlásit se</a>
-                <a class="btn btn-secondary" href="/Account/Register">Registrovat se</a>
+                <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Přihlásit se</a>
+                <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Registrovat se</a>
             </div>
+        </div>
+
+        <div class="hero-panel card-surface">
+            <h2>Co aplikace umí</h2>
+            <div class="feature-list">
+                <article class="feature-item">
+                    <strong>Správa místností</strong>
+                    <p>Přehled jednotlivých místností, pater a doplňujících informací.</p>
+                </article>
+                <article class="feature-item">
+                    <strong>Evidence závad</strong>
+                    <p>Rychlé zapisování, úprava stavů a přiřazení závady ke konkrétní místnosti.</p>
+                </article>
+                <article class="feature-item">
+                    <strong>Jednoduché ovládání</strong>
+                    <p>Čisté rozhraní, které dobře funguje i na mobilu nebo tabletu.</p>
+                </article>
+            </div>
+        </div>
     </div>
-</div>
+</section>

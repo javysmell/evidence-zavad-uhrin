@@ -2,37 +2,55 @@
     ViewData["Title"] = "Přihlášení";
 }
 
-<div class="auth-container">
-    <div class="auth-card auth-login-card">
-        <h2 class="auth-title">Přihlášení</h2>
+<section class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card card-surface auth-login-card">
+            <span class="eyebrow">Vítejte zpět</span>
+            <h1 class="auth-title">Přihlášení</h1>
+            <p class="auth-subtitle">Přihlas se a pokračuj do správy místností a závad.</p>
 
-        <form class="auth-form" method="post">
-            <div class="auth-group">
-                <label class="auth-label" for="auth-login-username">Uživatelské jméno</label>
-                <input class="auth-input"
-                       id="auth-login-username"
-                       name="username"
-                       type="text"
-                       required />
-            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <div>@error.ErrorMessage</div>
+                    }
+                </div>
+            }
 
-            <div class="auth-group">
-                <label class="auth-label" for="auth-login-password">Heslo</label>
-                <input class="auth-input"
-                       id="auth-login-password"
-                       name="password"
-                       type="password"
-                       required />
-            </div>
+            <form class="auth-form" method="post">
+                @Html.AntiForgeryToken()
 
-            <button class="auth-button auth-button-primary" type="submit">
-                Přihlásit se
-            </button>
-        </form>
+                <div class="auth-group">
+                    <label class="auth-label" for="auth-login-username">Uživatelské jméno</label>
+                    <input class="auth-input"
+                           id="auth-login-username"
+                           name="username"
+                           type="text"
+                           autocomplete="username"
+                           required />
+                </div>
 
-        <p class="auth-footer">
-            Nemáš účet?
-            <a class="auth-link" href="/Account/Register">Registrace</a>
-        </p>
+                <div class="auth-group">
+                    <label class="auth-label" for="auth-login-password">Heslo</label>
+                    <input class="auth-input"
+                           id="auth-login-password"
+                           name="password"
+                           type="password"
+                           autocomplete="current-password"
+                           required />
+                </div>
+
+                <button class="auth-button auth-button-primary" type="submit">
+                    Přihlásit se
+                </button>
+            </form>
+
+            <p class="auth-footer">
+                Nemáš účet?
+                <a class="auth-link" asp-controller="Account" asp-action="Register">Registrace</a>
+            </p>
+        </div>
     </div>
-</div>
+</section>

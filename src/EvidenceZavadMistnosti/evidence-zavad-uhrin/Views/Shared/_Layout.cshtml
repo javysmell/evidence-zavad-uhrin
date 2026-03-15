@@ -11,45 +11,63 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>@ViewData["Title"] - evidence_zavad_uhrin</title>
+    <title>@ViewData["Title"] - Evidence závad</title>
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 </head>
 <body>
-    <!-- Top bar -->
-    <header style="position:fixed;top:0;left:0;right:0;height:60px;background:#1e3c72;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:100;">
-        <div style="display:flex;align-items:center;gap:18px;">
-            <a asp-controller="Home" asp-action="Index" style="color:#fff;text-decoration:none;font-weight:700;">Evidence závad</a>
-            @* Viditelná jen pro přihlášené *@
-            @if (isAuth)
-            {
-                <nav style="display:flex;gap:14px;">
-                    <a asp-controller="Rooms" asp-action="Index" style="color:#fff;text-decoration:none;">Místnosti</a>
-                    <a asp-controller="Issues" asp-action="Index" style="color:#fff;text-decoration:none;">Závady</a>
-                </nav>
-            }
-        </div>
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="site-header__inner">
+                <div class="site-branding">
+                    <a class="site-logo" asp-controller="Home" asp-action="Index">
+                        <span class="site-logo__mark">EZ</span>
+                        <span class="site-logo__text">
+                            <strong>Evidence závad</strong>
+                            <small>Správa místností a hlášení problémů</small>
+                        </span>
+                    </a>
 
-        <div style="display:flex;align-items:center;gap:12px;">
-            @if (isAuth)
-            {
-                <span style="opacity:.9;">@username</span>
-                <form asp-controller="Account" asp-action="Logout" method="post" style="margin:0;">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" style="background:#fff;color:#1e3c72;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;font-weight:600;">Odhlásit</button>
-                </form>
-            }
-            else
-            {
-                <a asp-controller="Account" asp-action="Login" style="color:#fff;text-decoration:none;margin-right:10px;">Přihlásit se</a>
-                <a asp-controller="Account" asp-action="Register" style="color:#fff;text-decoration:none;border:2px solid #fff;padding:6px 12px;border-radius:6px;">Registrovat</a>
-            }
-        </div>
-    </header>
+                    @if (isAuth)
+                    {
+                        <nav class="site-nav" aria-label="Hlavní navigace">
+                            <a class="site-nav__link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Rooms" ? "is-active" : "")"
+                               asp-controller="Rooms" asp-action="Index">
+                                Místnosti
+                            </a>
+                            <a class="site-nav__link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Issues" ? "is-active" : "")"
+                               asp-controller="Issues" asp-action="Index">
+                                Závady
+                            </a>
+                        </nav>
+                    }
+                </div>
 
-    <!-- Page content -->
-    <main style="padding-top:80px;">
-        @RenderBody()
-    </main>
+                <div class="site-user-panel">
+                    @if (isAuth)
+                    {
+                        <div class="site-user-badge">
+                            <span class="site-user-badge__label">Přihlášený uživatel</span>
+                            <strong>@username</strong>
+                        </div>
+
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="site-logout-form">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-ghost" type="submit">Odhlásit</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="btn btn-ghost" asp-controller="Account" asp-action="Login">Přihlásit se</a>
+                        <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Registrovat</a>
+                    }
+                </div>
+            </div>
+        </header>
+
+        <main class="site-main">
+            @RenderBody()
+        </main>
+    </div>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

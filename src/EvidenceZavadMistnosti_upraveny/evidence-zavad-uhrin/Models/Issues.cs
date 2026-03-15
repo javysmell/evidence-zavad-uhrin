@@ -1,0 +1,28 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace evidence_zavad_uhrin.Models
+{
+    [Table("Issues")]
+    public class Issues
+    {
+        [Key]
+        [Column("Id")]
+        public int IssuesId { get; set; }
+
+        [Column("Title")]
+        public string Title { get; set; } = string.Empty;
+
+        [Column("Description")]
+        public string IssueDescription { get; set; } = string.Empty;
+
+        [Column("CreatedAt")]
+        public DateTime CreatedAt { get; set; }
+
+        [Column("Status")]
+        public string Status { get; set; } = string.Empty;
+
+        [Column("RoomId")]
+        public int RoomId { get; set; }
+    }
+}
